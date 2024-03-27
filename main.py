@@ -14,6 +14,9 @@ import image_recognition
 
 bot = commands.Bot(command_prefix='!', intents=discord.Intents.all())
 
+# Carga las variables de entorno desde el archivo .env
+load_dotenv()
+
 # Crear un set con los nombres de los personajes de chars.txt para utilizarlo posteriormente
 with open('chars.txt', 'r') as file:
     nombres_concatenados = file.readline().strip()
@@ -65,7 +68,7 @@ async def lvl_check():
 
                     # Verifica si el nivel ha aumentado
                     if int(updated_levels[name]) > int(levels[name]):
-                        channel = bot.get_channel(1203392557137268826)
+                        channel = bot.get_channel(int(os.getenv('AVISOS')))
                         original_name = name.replace('+', ' ')
                         await channel.send(
                             f'{original_name} has leveled up from level {levels[name]} to level {updated_levels[name]}! :chart_with_upwards_trend: ')
@@ -103,7 +106,7 @@ async def dead_list():
 
         for (nombre, nivel, asesino, fecha) in muertes_con_fechas:
             if nombre in chars and (nombre, fecha) not in registro_muertes:
-                channel = bot.get_channel(1203392557137268826)
+                channel = bot.get_channel(int(os.getenv('AVISOS')))
                 await channel.send(f'{nombre} {nivel} by {asesino} at {fecha} :skull: ')
                 registro_muertes.append((nombre, fecha))
 
@@ -196,7 +199,7 @@ async def loot(ctx):
     image_recognition.detect_items(bp, image_recognition.blue_item_images, image_recognition.green_item_images,
                                    image_recognition.rashid_item_images)
 
-    channel = bot.get_channel(1206232795949563964)
+    channel = bot.get_channel(int(os.getenv('COMANDOS')))
     await channel.send(file=discord.File('result.jpg'))
 
 # Comando para verificar qué personajes están en línea
@@ -224,7 +227,6 @@ async def online(ctx):
             await ctx.send(f"{name} | {vocation} level {value['level']}")
             levels_check[name] = value['level']
 
-# Carga las variables de entorno desde el archivo .env
-load_dotenv()
+
 # Ejecuta el bot con el token obtenido de las variables de entorno
 bot.run(os.getenv('TOKEN'))
