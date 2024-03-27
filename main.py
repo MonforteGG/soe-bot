@@ -136,17 +136,20 @@ async def addname(ctx, *, new_name):  # El argumento new_name captura todo el co
     web_chars = [char.replace(' ', '+') for char in
                  chars]  # Lista sin espacios para buscar correctamente en la web el nombre
 
-    # Buscamos qué nivel es y lo añadimos al diccionario global 'levels'
+    # Busca el nivel del nuevo personaje y lo añade al diccionario global 'levels'
     name_replace = new_name.replace(' ', '+')
     url = f'https://mortalis.soerpg.com/characterprofile.php?name={name_replace}'
     response = requests.get(url)
     html = response.text
     soup2 = BeautifulSoup(html, 'html.parser')
-    tibiafont = soup2.find('div', id='cp_header_desc').text.strip()
-    level_number = re.search(r'\d+', tibiafont).group()
 
-    global levels  # Indica que se está utilizando la variable global 'levels'
-    levels[name_replace] = level_number
+    cp_header_desc = soup2.find('div', id='cp_header_desc')
+    if cp_header_desc:
+        tibiafont = cp_header_desc.text.strip()
+        level_number = re.search(r'\d+', tibiafont)
+        if level_number:
+            level = level_number.group()
+            levels[name_replace] = level
 
 
 # Comando para obtener la ubicación de Rashid (Cambia la ubicación después del Server Save a las 10 am)
@@ -218,7 +221,7 @@ async def online(ctx):
                 case 'Elder Druid':
                     vocation = 'ED :snowflake: '
 
-            await ctx.send(f"{name} | {vocation} nivel {value['level']}")
+            await ctx.send(f"{name} | {vocation} level {value['level']}")
             levels_check[name] = value['level']
 
 # Carga las variables de entorno desde el archivo .env
