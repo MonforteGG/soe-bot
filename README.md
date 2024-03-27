@@ -6,13 +6,13 @@ En este caso está configurado para funcionar en el servidor Mortalis de soerpg.
 
 ## Descripción
 
-El bot está programado en Python utilizando la biblioteca **discord.py** para interactuar con la API de Discord utlizando operaciones asíncronas. Proporciona funciones como **añadir un nombre a la lista** y haciendo uso de la biblioteca **Beatufil Soup** podemos hacer **Web Scrapping** para verificar **las subidas de niveles de los personajes**, **las muertes de los personajes** o **consultar quien está online**. También es posible **consultar la ubicación actual de Rashid** o gracias a la biblioteca **OpenCV** con la que podemos procesar las imagenes adjuntas y **clasificar el loot por lugares de venta** entre otras cosas.
+El bot está programado en Python utilizando la biblioteca **discord.py** para interactuar con la API de Discord utlizando operaciones asíncronas. Proporciona funciones como **añadir un nombre a la lista** y haciendo uso de la biblioteca **Beautiful Soup** podemos hacer **Web Scrapping** para verificar **las subidas de niveles de los personajes**, **las muertes de los personajes** o **consultar quien está online**. También es posible **consultar la ubicación actual del NPC Rashid** o gracias a la biblioteca **OpenCV** con la que podemos procesar las imagenes adjuntas y **clasificar el loot por lugares de venta** entre otras cosas.
 
 ## Instalación
 
 1. Clona este repositorio en tu máquina local.
 2. Instala las dependencias necesarias utilizando el comando `pip install -r requirements.txt`.
-3. Asegúrate de tener un archivo `.env` con las variables de entorno necesarias, incluyendo el token del bot de Discord.
+3. Asegúrate de tener un archivo `.env` con las variables de entorno necesarias, incluyendo el token del bot de Discord y las ID's de los canales de Avisos y Comandos.
 4. Ejecuta el bot utilizando el comando `python bot.py`.
 
 ## Uso
