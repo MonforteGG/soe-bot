@@ -52,7 +52,5 @@ Passive Functions:
 
 ![image](https://github.com/MonforteGG/soe-bot/assets/148546500/f58394be-780f-433f-9dd2-f0ca508fbb97)
 
-## Credits
 
-This project was created by **@MonforteGG**.
 
